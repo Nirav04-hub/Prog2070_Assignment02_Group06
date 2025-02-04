@@ -101,6 +101,107 @@ namespace Assignment02_Grp_06
             // Assert
             Assert.That(expected, Is.EqualTo(product6.ItemPrice));
         }
+
+        // Tests 7 to 12 are written by Aryan
+        // These tests focus on decreasing stock levels to verify proper functionality and boundary cases.
+        // The reason for these tests is to ensure that stock decreases correctly under various conditions, including invalid inputs.
+
+        [Test]
+        public void DecreaseStock_input10_Return40()
+        {
+            // Test case 7: DecreaseStock should return 40
+            // Arrange
+            Product product7 = new Product(100, "Product7", 1000, 50);
+
+            // Act
+            int expected = 40;
+            product7.DecreaseInStock(10);
+
+            // Assert
+            Assert.That(expected, Is.EqualTo(product7.StockAmount));
+        }
+
+
+        [Test]
+        public void DecreaseStock_10Minus10_Output0()
+        {
+            // Test case 8: Test decreasing stock to exactly zero
+
+            //Arrange
+            var product = new Product(401, "Smartwatch", 150, 10);
+
+            //Act
+            int expected = product.DecreaseInStock(10);
+
+            //Assert
+            Assert.That(product.StockAmount, Is.EqualTo(10));
+        }
+
+
+        [Test]
+        public void DecreaseStock_30_20()
+        {
+            // Test case 9: Test decreasing stock by more than available (should not change)
+
+            //Arrange
+            var product = new Product(402, "Smartwatch", 150, 20);
+
+            //Act
+            product.DecreaseInStock(30);
+
+            //Assert
+            Assert.That(product.StockAmount, Is.EqualTo(20));
+        }
+
+
+        [Test]
+        public void DecreaseStock_0_20()
+        {
+            //Test case 10: Test decreasing stock with zero (should not change)
+
+            //Arrange
+            var product = new Product(403, "Smartwatch", 150, 20);
+
+            //Act
+            product.DecreaseInStock(0);
+
+            //Assert
+            Assert.That(product.StockAmount, Is.EqualTo(20));
+        }
+
+
+        [Test]
+        public void DecreaseStock_Minu5_0()
+        {
+            // Test case 11: Test decreasing stock with a negative value (should not change)
+
+            //Arrange
+            var product = new Product(404, "Smartwatch", 150, 20);
+
+            //Act
+            product.DecreaseInStock(-5);
+
+            //Assert
+            Assert.That(product.StockAmount, Is.EqualTo(25));
+        }
+
+
+        [Test]
+        public void DecreaseStock_1000_800000()
+        {
+            // Test case 12: Test decreasing stock from maximum limit
+
+            //Arrange
+            var product = new Product(405, "Smartwatch", 150, 800000);
+
+            //Act
+            product.DecreaseInStock(1000);
+
+            //Assert
+            Assert.That(product.StockAmount, Is.EqualTo(799000));
+        }
+
+
         
     }
 }
