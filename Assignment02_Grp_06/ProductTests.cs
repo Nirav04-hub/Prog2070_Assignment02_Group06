@@ -202,6 +202,102 @@ namespace Assignment02_Grp_06
         }
 
 
-        
+        // Tests 13 to 18 are written by Ayush
+        // These tests validate stock amount constraints and stock increase functionality.
+        // The reason for these tests is to check whether stock increases as expected and remains unchanged for invalid values.
+        [Test]
+        public void StockAmount_8_8()
+        {
+            //Test case 13: StockAmount should accept the minimum valid value
+
+            //Arrange
+            Product product = new Product(200, "Tablet", 500, 8);
+
+            //Act
+            int expected = 8;
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(8));
+        }
+
+
+        [Test]
+        public void StockAmount_800000_800000()
+        {
+            //Test case 14: StockAmount should accept the maximum valid value
+
+            //Arrange
+            Product product = new Product(201, "Tablet", 500, 800000);
+
+            //Act
+            int expected = 800000;
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(800000));
+        }
+
+        [Test]
+        public void StockAmount_400000_400000()
+        {
+
+            // Test case 15: To test is the stock amount is accepting the mid range value
+
+            //Arrange
+            var product = new Product(202, "Tablet", 500, 400000);
+
+            //Act
+            int expected = 400000;
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(400000));
+        }
+
+        [Test]
+        public void IncreaseStock_50_60()
+        {
+            //Test case 16: Testing if the stock is increasing 
+
+            //Arrange
+            var product = new Product(300, "Headphones", 8, 50);
+
+            //Act
+            int expected = product.IncreaseInStock(10);
+
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(60));
+        }
+
+
+        [Test]
+        public void IncreaseStock_0_50()
+        {
+            // Test case 17: Testing if the stock is not changing when the value is zero
+
+            //Arrange
+            var product = new Product(301, "Headphones", 8, 50);
+
+            //Act
+            int expected = product.IncreaseInStock(0);
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(50));
+        }
+
+
+        [Test]
+        public void IncreaseStock_Minus5_50()
+        {
+            // Test case 18 increasing stock with negative value it should not change the amount
+
+            //Arrange
+            var product = new Product(302, "Headphones", 8, 50);
+
+            //Act
+            int expected = product.IncreaseInStock(-5);
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(50));
+        }
     }
 }
